@@ -246,9 +246,14 @@ yajl_end_array
 }
 
 - (id)parse:(NSData *)data error:(NSError **)error {
-	[self _setup:error];
-	if (*error) {
-		YAJLDebug(@"Error: %@", *error);
+    NSError *localError = nil;
+	[self _setup: &localError];
+	if (localError) {
+        if (error) {
+            (*error) = localError;
+        }
+        
+		YAJLDebug(@"Error: %@", *localError);
 		[self _reset];
 		return nil;
 	}
@@ -258,8 +263,11 @@ yajl_end_array
 		unsigned char *errorMessage = yajl_get_error(handle_, 0, [data bytes], [data length]);
 		NSString *errorString = [NSString stringWithUTF8String:(char *)errorMessage];
 		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:errorString forKey:NSLocalizedDescriptionKey];
-		if (error) *error = [NSError errorWithDomain:YAJLErrorDomain code:status userInfo:userInfo];
-		YAJLDebug(@"Error: %@", *error);
+		if (error) {
+            *error = [NSError errorWithDomain:YAJLErrorDomain code:status userInfo:userInfo];
+            YAJLDebug(@"Error: %@", *error);
+        }
+        
 		yajl_free_error(handle_, errorMessage);
 	}
 
