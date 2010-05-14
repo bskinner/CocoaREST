@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CF396D3119CE72A0049562C /* XMLDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF396D2119CE72A0049562C /* XMLDecoder.m */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		944D89F20FD61DF7002A71C6 /* SDFriendfeedTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 944D89F10FD61DF7002A71C6 /* SDFriendfeedTaskManager.m */; };
@@ -45,6 +46,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		2CF396D1119CE72A0049562C /* XMLDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDecoder.h; path = Source/XMLDecoder.h; sourceTree = "<group>"; };
+		2CF396D2119CE72A0049562C /* XMLDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDecoder.m; path = Source/XMLDecoder.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* SDSocialNetwork_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSocialNetwork_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* SDSocialNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDSocialNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +198,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2CF396C9119CE70A0049562C /* XML Parsing */ = {
+			isa = PBXGroup;
+			children = (
+				2CF396D1119CE72A0049562C /* XMLDecoder.h */,
+				2CF396D2119CE72A0049562C /* XMLDecoder.m */,
+			);
+			name = "XML Parsing";
+			sourceTree = "<group>";
+		};
 		944D89EE0FD61D6B002A71C6 /* Friendfeed */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +252,7 @@
 				944D89EE0FD61D6B002A71C6 /* Friendfeed */,
 				94BFA4860FD065E500806DA0 /* Categories */,
 				94BFA4870FD065F600806DA0 /* JSON Parsing */,
+				2CF396C9119CE70A0049562C /* XML Parsing */,
 			);
 			name = SDSocialNetwork;
 			sourceTree = "<group>";
@@ -395,6 +408,7 @@
 				F4FBEF9C114323F800E69784 /* GithubDelegate.m in Sources */,
 				F44B340811497EC400380BCC /* SDGithubTask.m in Sources */,
 				F44B340911497EC400380BCC /* SDGithubTaskManager.m in Sources */,
+				2CF396D3119CE72A0049562C /* XMLDecoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 #import "SDNetTask+Subclassing.h"
 
 #import "YAJLDecoder.h"
+#import "XMLDecoder.h"
 
 @interface SDNetTask (Private)
 
@@ -133,6 +134,12 @@
 	switch ([self parseFormatBasedOnTaskType]) {
 		case SDParseFormatJSON: {
 			YAJLDecoder *decoder = [[[YAJLDecoder alloc] init] autorelease];
+			results = [[decoder parse:data error:&errorFromParser] retain];
+			
+			break;
+		}
+		case SDParseFormatXML: {
+			XMLDecoder *decoder = [[[XMLDecoder alloc] init] autorelease];
 			results = [[decoder parse:data error:&errorFromParser] retain];
 			
 			break;
