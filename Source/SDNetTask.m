@@ -14,6 +14,8 @@
 #import "YAJLDecoder.h"
 #import "XMLDecoder.h"
 
+#import <objc/message.h>
+
 @interface SDNetTask (Private)
 
 - (void) _appendToData:(NSMutableData*)data formatWithUTF8:(NSString*)format, ...;
@@ -117,12 +119,23 @@
 	
 	if (connectionError) {
 		underlyingError = connectionError;
-		
 		// commented out the next line because some APIs are using HTTP error codes as return values, which is super lame
 		
 //		errorCode = SDNetTaskErrorConnectionFailed;
 //		[self _sendResultsToDelegate];
 //		return;
+	}
+	
+	switch ([underlyingError code]) {
+		case NSURLErrorUserCancelledAuthentication:
+			errorCode = SDNetTaskErrorAuthenticationCanceled;
+			break;
+		case NSURLErrorUserAuthenticationRequired:
+			errorCode = SDNetTaskErrorAuthenticationFailed;
+			break;
+		case NSURLErrorNotConnectedToInternet:
+			errorCode = SDNetTaskErrorNotConnectedToInternet;
+			break;	
 	}
 	
 	if (data == nil) {
@@ -158,6 +171,7 @@
 		errorCode = SDNetTaskErrorParserFailed;
 		underlyingError = errorFromParser;
 	}
+	
 	else if (results == nil)
 		errorCode = SDNetTaskErrorParserDataIsNil;
 	
@@ -174,8 +188,7 @@
 	
 	if (errorCode == SDNetTaskErrorNone) {
 		[self sendResultsToDelegate];
-	}
-	else {
+	} else {
 		// we'll create our error manually and let the delegate get all touchy-feely with it all they want
 		
 		NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
@@ -354,6 +367,10 @@
 	errorStrings[SDNetTaskErrorConnectionFailed] = @"Connection failed with error";
 	errorStrings[SDNetTaskErrorParserFailed] = @"Parser failed with error";
 	errorStrings[SDNetTaskErrorParserDataIsNil] = @"Parser returned NULL data";
+	errorStrings[SDNetTaskErrorAuthenticationCanceled] = @"Authentication request cancelled";
+	errorStrings[SDNetTaskErrorAuthenticationFailed] = @"Authentication failed";
+	errorStrings[SDNetTaskErrorNotConnectedToInternet] = @"No internet connection established";
+
 	return errorStrings[errorCode];
 }
 
